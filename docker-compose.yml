@@ -1,0 +1,21 @@
+version: '3.2'
+
+services:
+  my-app-prod:
+    container_name: my-app-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    environment:
+      - VIRTUAL_HOST=dashboard.primalmkt.com
+      - LETSENCRYPT_HOST=dashboard.primalmkt.com
+      - LETSENCRYPT_EMAIL=soporte@primalmkt.com
+networks:
+  default:
+    external:
+      name: work
